@@ -1,0 +1,45 @@
+exclude: ^venv/
+repos:
+
+# jupyter notebook: don't commit the output of juptyter notebooks
+# Attention: Jupyter will make to a clean notebook -> all output is gone after this repro
+- repo: https://github.com/kynan/nbstripout
+  rev: 0.5.0
+  hooks:
+    - id: nbstripout
+
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.2.0
+  hooks:
+  - id: trailing-whitespace
+  - id: check-added-large-files
+    args: ['--maxkb=900']
+  - id: check-ast
+  - id: check-json
+  - id: check-merge-conflict
+  - id: check-xml
+  - id: check-yaml
+  - id: debug-statements
+  - id: end-of-file-fixer
+  - id: requirements-txt-fixer
+  - id: mixed-line-ending
+    args: ['--fix=auto']
+    language_version: python3
+
+- repo: https://github.com/psf/black
+  rev: 22.3.0
+  hooks:
+  - id: black
+    args: [--safe, --line-length=88, --experimental-string-processing]
+
+- repo: https://github.com/pycqa/isort
+  rev: 5.12.0
+  hooks:
+  - id: isort
+    args: ["--profile", "black", "--filter-files"]
+
+- repo: https://github.com/pycqa/flake8
+  rev: 4.0.1
+  hooks:
+  - id: flake8
+    args: ['--ignore=E203,E231,F401,E501,W503,F841']
