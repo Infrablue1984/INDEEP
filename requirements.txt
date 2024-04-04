@@ -1,0 +1,12 @@
+bokeh==3.0.3
+igraph
+# Remove line-profiler-pycharm when not needed any longer
+line-profiler-pycharm
+networkx
+numpy
+openpyxl
+pandas
+pre-commit
+scipy
+tqdm
+xlrd
