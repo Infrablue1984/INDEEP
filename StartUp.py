@@ -110,7 +110,7 @@ def set_GUI():
     # Example 2: my_regional_code = [7]
     # To understand regional code, see docstring of method
     # _extract_counties_code_and_scale_from_input_date
-    regional_code = [1]
+    regional_code = [5162]
     # transfer regional code
     regional_code, scale = _extract_counties_code_and_scale_from_input_date(
         regional_code
