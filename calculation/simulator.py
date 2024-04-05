@@ -134,39 +134,15 @@ class SimManager:
         """
         SimManager.pre_check_start_and_end_date(self.start_date, self.end_date)
         IM.pre_check_intervention_user_input(self.intervention_list)
-        self._organize_generation_of_key_data_for_selected_regions()
+        data_manager.DataManager.organize_generation_of_key_data_for_selected_regions(
+            self.regions, self.scale, SimManager.sim_progress
+        )
         if number_of_runs == 1:
             result_dict = self._organize_simple_run()
         else:
             result_dict = self._organize_multiple_runs(number_of_runs)
         tracker.TrackResults.export_results(result_dict)
         SimManager.sim_progress = None
-
-    def _organize_generation_of_key_data_for_selected_regions(self):
-        """Organize the generation of key data for the selected regions.
-
-        People, Household and School objects etc. are created by the
-        implementation of algorithms on different statistical data. In
-        order to speed up the simulation, these calculations are done
-        only one time for each region and only, if the region was
-        selected by the user. The results are saved in a modified data
-        file. This method checks for new regions to be calculated and
-        if, calls the DataManager class to perform the data generation.
-        """
-        (
-            creation_needed,
-            regions_new,
-        ) = data_manager.DataManager.check_for_new_regions_to_create(
-            self.regions,
-            self.scale,
-        )
-        if creation_needed:
-            data_manager.DataManager.create_people_and_network_files(
-                regions_new,
-                self.scale,
-                SimManager.sim_progress,
-            )
-            time.sleep(0.5)
 
     def _organize_simple_run(self) -> dict:
         """Run the simulation once.
