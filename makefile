@@ -28,3 +28,7 @@ test:
 	$(UNITTEST) tests.public_regulator_test
 	$(UNITTEST) tests.simulator_test
 	$(UNITTEST) tests.tracker_test
+
+.PHONY: run
+run:
+	python StartUp.py
