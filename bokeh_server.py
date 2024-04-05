@@ -32,7 +32,7 @@ from bokeh.models import (
 from bokeh.palettes import Sunset
 from bokeh.plotting import curdoc, figure
 
-from synchronizer import constants as cs
+import synchronizer.constants as cs
 from synchronizer.synchronizer import PathManager as PM
 from synchronizer.synchronizer import Synchronizer
 

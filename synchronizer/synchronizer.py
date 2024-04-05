@@ -267,7 +267,7 @@ class PathManager:
     @staticmethod
     def get_path_bokeh_server():
         abs_path = os.path.join(
-            Config.BUNDLE_DIR, Config.AGENT_MODEL_DIR, "calculation", "bokeh_server.py"
+            Config.BUNDLE_DIR, Config.AGENT_MODEL_DIR, "bokeh_server.py"
         )
         abs_path = abs_path.replace(" ", r"\ ")  # remove empty spaces
         return abs_path

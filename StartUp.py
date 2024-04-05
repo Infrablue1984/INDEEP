@@ -110,7 +110,7 @@ def set_GUI():
     # Example 2: my_regional_code = [7]
     # To understand regional code, see docstring of method
     # _extract_counties_code_and_scale_from_input_date
-    regional_code = [5162]
+    regional_code = [1002]
     # transfer regional code
     regional_code, scale = _extract_counties_code_and_scale_from_input_date(
         regional_code
@@ -119,8 +119,7 @@ def set_GUI():
 
 
 def simulate():
-    """Set seed, create ClassSimManager and run the simulation with global input data.
-    """
+    """Set seed, create ClassSimManager and run the simulation with global input data."""
     np.random.seed(10)
     set_GUI()
     print(f"Run simulation for my_regional_code: {regional_code}")
