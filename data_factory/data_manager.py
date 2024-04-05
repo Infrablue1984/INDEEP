@@ -39,6 +39,32 @@ Specifically save agents_data of people class including network ids in ndarray/c
 
 class DataManager:
     @staticmethod
+    def organize_generation_of_key_data_for_selected_regions(
+        regions, scale, sim_progress=False
+    ):
+        """Organize the generation of key data for the selected regions.
+
+        People, Household and School objects etc. are created by the
+        implementation of algorithms on different statistical data. In
+        order to speed up the simulation, these calculations are done
+        only one time for each region and only, if the region was
+        selected by the user. The results are saved in a modified data
+        file. This method checks for new regions to be calculated and
+        if, calls the DataManager class to perform the data generation.
+        """
+        (creation_needed, regions_new,) = DataManager.check_for_new_regions_to_create(
+            regions,
+            scale,
+        )
+        if creation_needed:
+            DataManager.create_people_and_network_files(
+                regions_new,
+                scale,
+                sim_progress,
+            )
+            time.sleep(0.5)
+
+    @staticmethod
     # @profile
     def create_people_and_network_files(regions, scale, sim_progress):
         my_regions = regions
@@ -53,34 +79,40 @@ class DataManager:
             print(
                 f"Create key data for regions {my_regions[:my_slice]} at scale {scale}:"
             )
-            sim_progress["text"] = "Generate key data for simulation"
+            if sim_progress:
+                sim_progress["text"] = "Generate key data for simulation"
             t1 = time.time()
             people = p.People(my_regions[:my_slice], scale)
             people.initialize_data()
             t2 = time.time()
             print(f"    people class: {round(t2 - t1, 2)}s")
-            sim_progress["progress"] += 5 * my_slice / total_num_regions
+            if sim_progress:
+                sim_progress["progress"] += 5 * my_slice / total_num_regions
             # Todo: do not make corridor/ random contacts < 2
             t1 = time.time()
             households = Households(people, scale)
             t2 = time.time()
             print(f"    {type(households).__name__} class: {round(t2 - t1, 2)}s")
-            sim_progress["progress"] += 70 * my_slice / total_num_regions
+            if sim_progress:
+                sim_progress["progress"] += 70 * my_slice / total_num_regions
             t1 = time.time()
             schools = Schools(people, scale)
             t2 = time.time()
             print(f"    {type(schools).__name__} class: {round(t2 - t1, 2)}s")
-            sim_progress["progress"] += 10 * my_slice / total_num_regions
+            if sim_progress:
+                sim_progress["progress"] += 10 * my_slice / total_num_regions
             t1 = time.time()
             works = Workplaces(people, scale)
             t2 = time.time()
             print(f"    {type(works).__name__} class: {round(t2 - t1, 2)}s")
-            sim_progress["progress"] += 15 * my_slice / total_num_regions
+            if sim_progress:
+                sim_progress["progress"] += 15 * my_slice / total_num_regions
             t1 = time.time()
             activities = Activities(people, scale)
             t2 = time.time()
             print(f"    {type(activities).__name__} class: {round(t2 - t1, 2)}s")
-            sim_progress["progress"] += 10 * my_slice / total_num_regions
+            if sim_progress:
+                sim_progress["progress"] += 10 * my_slice / total_num_regions
             t1 = time.time()
             agents_networks = Transformer.network_ids_to_people(
                 people, households, schools, works, activities

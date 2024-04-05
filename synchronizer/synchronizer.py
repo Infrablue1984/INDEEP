@@ -248,6 +248,10 @@ class PathManager:
         return os.path.join(Config.INFO_FILE_DIR, f"info_file_{scale}.npy")
 
     @staticmethod
+    def get_path_scenario_file():
+        return os.path.join(Config.SCENARIO_FILE_DIR, "COVID_default.csv")
+
+    @staticmethod
     def get_path_agents_data(key, scale):
         file_name = f"agents_{key}_{scale}.npy"
         return os.path.join(Config.AGENT_FILE_DIR, file_name)

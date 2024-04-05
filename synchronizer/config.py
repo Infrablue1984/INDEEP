@@ -89,3 +89,12 @@ class Config(object):
             copy(file, INFO_FILE_DIR)
 
     OUTPUT_FILE_DIR = os.path.join(user_dir, "outputs")
+
+    SCENARIO_FILE_DIR = os.path.join(user_dir, "inputs", "scenario")
+
+    if not os.path.exists(SCENARIO_FILE_DIR):
+        os.mkdir(SCENARIO_FILE_DIR)
+        src_dir = os.path.join(BUNDLE_DIR, "files", "social_data", "*.xlsx")
+
+        for file in glob.glob(src_dir):
+            copy(file, SCENARIO_FILE_DIR)

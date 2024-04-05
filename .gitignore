@@ -27,7 +27,7 @@ venv.bak/
 
 .pylint.d/
 .spyproject/
-*.npy 
+*.npy
 
 # generated data files
 bokeh_test/
@@ -35,5 +35,6 @@ data/inputs/network_files/*.csv
 data/inputs/network_files/*.npy
 data/inputs/agent_files/*.npy
 data/inputs/info_file/*.npy
+data/inputs/social_data/*.xlsx
+data/inputs/social_data/*.xls
 data/outputs/data.csv
-

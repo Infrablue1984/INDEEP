@@ -6,6 +6,7 @@ __created__ = "2020"
 __date_modified__ = "2023/03/03"
 __version__ = "1.0"
 
+import os
 import unittest
 from datetime import date
 
@@ -15,13 +16,18 @@ import pandas as pd
 from calculation import epidemics
 from calculation.network_manager import NetworkManager
 from calculation.people import People
+from data_factory import data_manager
+from synchronizer.synchronizer import PathManager
 
 
 class TestEpidemicSpreader(unittest.TestCase):
     def setUp(self):
-        regions = [5162]
+        regions = np.array([5162])
         start_date = date(2020, 9, 30)
         scale = 100
+        data_manager.DataManager.organize_generation_of_key_data_for_selected_regions(
+            regions, scale
+        )
         self.seed = np.random.default_rng(2)
 
         self.epidemic_data = {}
@@ -33,8 +39,10 @@ class TestEpidemicSpreader(unittest.TestCase):
 
         self.population_size = self.people.get_pop_size()
 
+        scenario_file = PathManager.get_path_scenario_file()
+
         self.epi_user_input = pd.read_csv(
-            "../data/inputs/scenario/COVID_default.csv",
+            scenario_file,
             usecols=["parameter", "value", "type"],
             dtype={"parameter": str, "value": float, "type": str},
             index_col="parameter",
@@ -45,7 +53,7 @@ class TestEpidemicSpreader(unittest.TestCase):
         )
 
         self.ref_epi_user_input = dict()
-        with open("../data/inputs/scenario/COVID_default.csv") as fp:
+        with open(scenario_file) as fp:
             lines = fp.readlines()
         for item in lines:
             temp = item.split(",")
