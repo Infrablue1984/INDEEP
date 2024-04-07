@@ -563,7 +563,7 @@ class SimRunner:
             condition (ClassCondition): Ensure all initializations are finished.
         """
         with condition:
-            if progress_bar["progress"] > 99:
+            if progress_bar["progress"] > 97:
                 condition.notify_all()
             else:
                 condition.wait()

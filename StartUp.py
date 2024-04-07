@@ -32,7 +32,7 @@ def _extract_counties_code_and_scale_from_input_date(my_regional_code):
     """Extract code of counties and scale from regional code.
 
     The regional code can symbolize one or more federal states, the whole of Germany or
-    single counties. --> to understand code, please read data/inputs/social_data:
+    single counties. To find specific regional code, go to data/inputs/social_data:
     - pop_cities
     - pop_counties
     - pop_cities
@@ -42,8 +42,7 @@ def _extract_counties_code_and_scale_from_input_date(my_regional_code):
     Case 2:
         [0] means calculation for whole Germany and all county codes will be extracted.
     Case 3:
-        E.g: [5162, 1002, 1003] are county codes and will just be returned as they were.
-
+        E.g: [5162, 1002, 1003] are county codes and will just be returned.
     Args:
         my_regional_code (list[int]): List of regional codes, e.g. [5, 7], [0] or
         [5162, 1002, 1003]
