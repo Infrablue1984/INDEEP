@@ -4,9 +4,11 @@ The major references for this model are summarized in this script. They are inco
 
 #### References for the model idea
 
+Adler S, Bodeit O, Bonn L, Goldenbogen B, Haffner J, Karnetzki M, et al. Geospatially Referenced Demographic Agent-Based Modeling of SARS-CoV-2-Infection (COVID-19) Dynamics and Mitigation Effects in a Real-world Community. 2020.
 
+Kerr CC, Stuart RM, Mistry D, Abeysuriya RG, Rosenfeld K, Hart GR, et al. Covasim: An agent-based model of COVID-19 dynamics and interventions. Marz M, editor. PLoS Comput Biol [Internet]. 2021 [cited 2024 Apr 7];17:e1009149. Available from: https://dx.plos.org/10.1371/journal.pcbi.1009149
 
-
+Hinch R, Probert WJM, Nurtay A, Kendall M, Wymatt C, Hall M, et al. OpenABM-Covid19 - an agent-based model for non-pharmaceutical interventions against COVID-19 including contact tracing [Internet]. Epidemiology; 2020 Sep. Available from: http://medrxiv.org/lookup/doi/10.1101/2020.09.16.20195925
 
 #### References for disease spreading
 

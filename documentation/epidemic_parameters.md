@@ -52,11 +52,7 @@ Since the parameters $\gamma$ and $\beta$ have no physical meaning, they must be
 
 ###### particle_deposition
 
-The deposition rate of aerosols is given by
-\begin{align*}
-    k = \frac{1}{t_d},
-\end{align*}
-$k = \frac{1}{t_d}$, where the deposition time $t_d$ of an aerosol is determined as the quotient of the deposition speed and the height of the emission source. The unit used in the model is $h^{-1}$.
+The deposition rate of aerosols is given by $k = \frac{1}{t_d}$, where the deposition time $t_d$ of an aerosol is determined as the quotient of the deposition speed and the height of the emission source. The unit used in the model is $h^{-1}$.
 
 ###### viral_inactivation
 
