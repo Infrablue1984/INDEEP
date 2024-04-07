@@ -1,8 +1,6 @@
 # INDEEP (agent-based model)
 
-[toc]
-
-
+## Description
 
 The INDEEP agent-based model is developed to model the spread of diseases among
 

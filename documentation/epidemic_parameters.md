@@ -1,8 +1,22 @@
 # COVID_default.csv
 
-### Parameter Description
+### General information
 
-The parameter description is incomplete due to limited time to translate the whole documentation from German to English.
+The COVID_default.csv files contains the epidemiological parameteres for the spread of covid19, which in our model accounts for the so called AirborneVirusSpreader's. (**Attention: the parameters are not validated yet, even not for covid19!!!**).
+
+INDEEP is also meant to model other airborne spreaded diseases, e.g. influenza, with identical parameter types, but different values. Those values have not been researched yet.
+
+INDEEP is also meant to model other type of disease, e.g. smear infections, which is not implemented yet, but can be easily extended.
+
+The parameter description is incomplete due to limited time to translate the documentation from German to English.
+
+### Parameter adjustment
+
+1. Go to the line of the parameter to adjust.
+2. Change the number of the value. (Do not change the name of the value or the file structure, this will raise an error!)
+3. Save file.
+
+### Parameter Description
 
 ###### Unreported factor
 
