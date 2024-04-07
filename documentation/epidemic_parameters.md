@@ -1,155 +1,110 @@
-Im folgenden werden die einstellbaren Parameter des Agenten basierten Modells erläutert.
+# COVID_default.csv
 
-Faktor der nicht gemeldeten Infektionen (Dunkelziffer)
+### Parameter Description
 
-Die Dunkelziffer beschreibt das Missverhältnis von diagnostizierten (gemeldeten) Krankheitsfällen zur Anzahl von tatsächlich erkrankten Bürger:innen.
+The parameter description is incomplete due to limited time to translate the whole documentation from German to English.
 
-Eine Dunkelziffer von 3 entspricht dabei der Situation von drei mal soviel Erkrankten, wie eigentlich gemeldet sind.
+###### Unreported factor
 
-Wie viel Prozent der Bevölkerung sind (ohne Dunkelziffer) infiziert?
+The unreported factor describes the disproportion of diagnosed (reported) cases of illness to the number of citizens who are actually ill.An unreported number of 3 corresponds to the situation of three times as many sick people as are actually reported.
 
-Hier wird der prozentuale Anteil der offiziell gemeldeten infizierten Bevölkerung eingegeben.
+###### reported_infected_percentage
 
-Wie viel Prozent der Bevölkerung sind immun gegen die Krankheit?
+###### reported_infected_percentage
 
-Dieser Parameter ist auch bekannt unter dem Namen der **Seroprävalenz**.
+###### initially_recovered_percentage
 
-Hier handelt es sich um den prozentualen Anteil der Bevölkerung, der eine natürliche Immunität gegen die Krankheit aufweist.
+###### initially_vaccinated_percentage
 
-Wie viel Prozent der Bevölkerung sind geimpft?
+###### hospital_percentage
 
-Hier wird der prozentuale Anteil der geimpften Bevölkerung angegeben.
+###### viral_load_mu and viral_load_sigma
 
-Zum jetzigen Zeitpunkt beinhaltet das Modell keine Neu- sowie Auffrischungsimpfungen von Bürger:innen.
+The viral load describes the amount of viruses found in the saliva of an infected person and is given in this model as the concentration $\log_{10}(\text{RNA Kopien pro mL})$. Within a population, the viral load can vary greatly from person to person, but also within the course of the disease.
+In this model, each agent is therefore assigned a standard viral load, which is determined using a logarithmic normal distribution.
+This distribution is determined by two parameters $\mu$ and $\sigma$, which can be set separately in the tool. As is usual in medicine, the unit of $\log_{10}(\text{RNA Kopien pro mL})$ is used.
+At the start of an agent's infectivity, its viral load is increased for 4 days by doubling its standard viral load.
 
-Für wie viel Prozent der Bevölkerung gibt es Krankenhausbetten?
+###### quanta_conversion_factor
 
-Dieser Parameter gibt, mittels prozentualem Anteil an der Gesamtbevölkerung, die Anzahl der Krankenhausbetten in den zu simulierenden Regionen an.
+###### droplet_volume_concentration_mean
 
-Dieser Wert entspricht damit der Anzahl von Bürger:innen, die zum selben Zeitpunkt im Krankenhaus behandelt werden können.
+###### droplet_volume_concentration_std
 
-Parameter $\mu$ und $\sigma$ der Viruslast $c_v$ in der Bevölkerung
+###### gamma and beta
 
-Die Viruslast beschreibt die im Speichel einer infizierten Person vorkommende Menge an Viren und wird in diesem Modell als Konzentration der RNA Kopien pro \si{\milli\liter angegeben.
+In order to make infection via direct contact consistent with infection via aerosols, two abstract parameters $\gamma$ and $\beta$ were introduced. Following the approach of (Buonanno et. Al) for determining the inhaled infectious quanta, the model includes the calculation using  dose of received quanta. This is calculated using the following formula: $D_q = f_s \cdot f_m \cdot IR_e \cdot IR_r \cdot QEL \cdot \gamma \int_{0}^{T}\left(1-e^{-\beta\cdot t}\right) dt$ , where $f_s$ and $f_m$ include keeping your distance and wearing a mask as factors, $IR_e$ and $IR_r$ describe the inhalation rate of the emitter and receiver, $QEL$ the quantum emission load and $T$ indicates the duration of the contact.
+Since the parameters $\gamma$ and $\beta$ have no physical meaning, they must be calibrated for a reliable simulation.
 
-Innerhalb einer Bevölkerung kann die Viruslast von Mensch zu Mensch, aber auch innerhalb eines Krankheitsverlaufs stark variieren.
+###### particle_deposition
 
-In diesem Modell wird jedem Agenten daher eine Standard-Viruslast zugeordnet, die anhand einer logarithmischen Normalverteilung bestimmt wird.
+The deposition rate of aerosols is given by
+\begin{align*}
+    k = \frac{1}{t_d},
+\end{align*}
+$k = \frac{1}{t_d}$, where the deposition time $t_d$ of an aerosol is determined as the quotient of the deposition speed and the height of the emission source. The unit used in the model is $h^{-1}$.
 
-Diese Verteilung wird festgelegt durch zwei Parameter $\mu$ und $\sigma$, die im Tool separat eingestellt werden können.
+###### viral_inactivation
 
-Dabei wird, wie in der Medizin üblich, die Einheit von $\log_{10(\text{RNA Kopien pro \si{\milli\liter)$ gebraucht.
+The inactivation of viruses is described by the exponential decay $    N(t) = N_0e^{-kt}$,
+where $N_0$ represents the number of viruses at the beginning.
+The virus inactivation rate (or general elimination constant) $k$ can be expressed by the half-life $t_{1/2}$ as follows
+$k = \frac{\ln 2}{t_{1/2}}$. The virus inactivation rate is given in the unit $h^{-1}$.
 
-Zu Beginn der Infektiösität eines Agenten wird seine Viruslast für 4 Tage, durch Verdoppelung seiner Standard-Viruslast, erhöht.
+###### mask_factor_emitter
 
-Anzahl der RNA Kopien pro infektiösem Quantum
+###### mask_factor_receiver
 
-Ein infektiöses Quantum wird in der Wissenschaft benutzt, um die Menge der Viren, die für eine Ansteckung notwendig sind, zu quantifizieren.
+###### social_distancing_factor
 
-Dabei wird die Wahrscheinlichkeit für die Ansteckung einer suszeptiblen Person durch die Menge der von ihr inhalierten infektiösen Quanten bestimmt.
+###### vaccination_factor_viral_load
 
-Der hier eingegebene Parameter Wert entspricht dem Umrechnungsfaktor (\textit{*engl. conversion factor*) von RNA Kopien des Virus zu infektiösem Quantum.
+###### vaccination_factor_relative_sensitivity
 
-Weiterführende Informationen zur Modellierung mit infektiösen Quanten finden sich in \cite{BUONANNO2020106112, \cite{Mikszewski2021.01.26.21250580 und \cite{To2010.
+###### vaccination_factor_progression
 
-Mittelwert und Standardabweichung der \newline Tröpfchen-Volumenkonzentration beim Sprechen
+###### not_hospitalized_factor
 
-Die Tröpfchen-Volumenkonzentration einer Person gibt an, zu welchem Teil ihre ausgeatmete Luft aus Tröpfchen bzw. Aerosolen besteht.
+###### exposed_to_asymptomatic_mean
 
-Dabei wird als Einheit \si{\milli\liter pro \si{\cubic\metre benutzt.
+###### exposed_to_presymptomatic_mean
 
-Um eine Varianz in der Bevölkerung zu ermöglichen, bekommt jeder Agent eine Standard-Tröpfchen-Volumenkonzentration zugewiesen, die anhand einer Normalverteilung ermittelt wird.
+###### asymptomatic_to_recovered_mean
 
-Der Mittelwert und die Standardabweichung, die diese Normalverteilung beschreiben, werden als Parameter angegeben.
+###### presymptomatic_to_mild_mean
 
-Infektionsparameter $\gamma$ und $\beta$ für direkte Kontakte
+###### mild_to_severe_mean
 
-Um die Ansteckung über direkte Kontakte einheitlich mit der Ansteckung über Aerosole zu gestalten wurden zwei abstrakte Parameter $\gamma$ und $\beta$ eingeführt.
+###### severe_to_critical_mean
 
-Dem Ansatz von \cite{BUONANNO2020106112 zur Bestimmung der inhalierten infektiösen Quanta folgend, enthält das Modell die Berechnung mittels empfangener Quantendosis (\textit{*engl. dose of received quanta*).
+###### critical_to_dead_mean
 
-Diese wird mit der folgenden Formel berechnet:
+###### mild_to_recovered_mean
+###### severe_to_recovered_mean
 
-\begin{align\label{quantendosis_cp
+###### critical_to_recovered_mean
+###### exposed_to_asymptomatic_std
 
-​    D_q = f_s \cdot f_m \cdot IR_e \cdot IR_r \cdot QEL \cdot \gamma \int_{0^{T\left(1-e^{-\beta\cdot t\right)dt,
+###### exposed_to_presymptomatic_std
 
-\end{align
+###### asymptomatic_to_recovered_std
 
-wobei $f_s$ und $f_m$ als Faktoren das Abstandhalten und Tragen einer Maske beinhalten, $IR_e$ und $IR_r$ die Inhalationsrate von Emitter und Empfänger (\textit{*engl. receiver*) beschreiben, $QEL$ die Quanten-Emissionslast und $T$ die Dauer des Kontaktes angibt.
+###### presymptomatic_to_mild_std
 
-Da die Parameter $\gamma$ und $\beta$ keine physikalische Bedeutung haben, müssen diese für eine belastbare Simulation kalibriert werden.
+###### mild_to_severe_std
 
-Ablagerungsrate von Aerosolen auf Oberflächen
+###### severe_to_critical_std
 
-Die Ablagerungsrate von Aerosolen ist gegeben durch
+###### critical_to_dead_std
 
-\begin{align*
+###### mild_to_recovered_std
 
-​    k = \frac{1{t_d,
+###### severe_to_recovered_std
 
-\end{align*
+###### critical_to_recovered_std
 
-wobei die Ablagerungszeit $t_d$ eines Aerosols als Quotient von Ablagerungsgeschwindigkeit und Höhe der Emissionsquelle bestimmt wird.
-
-Als Einheit wird im Modell \si{\per\hour genutzt.
-
-Virusinaktivierungsrate
-
-Die Inaktivierung von Viren wird beschrieben durch den exponentiellen Abfall
-
-\begin{align*
-
-​    N(t) = N_0e^{-kt,
-
-\end{align*
-
-wobei $N_0$ die Anzahl der Viren zu Beginn darstellt.
-
-Die Virusinaktivierungsrate (oder allgemein Eliminationskonstante) $k$ kann dabei durch die Halbwertszeit $t_{1/2$ folgendermaßen ausgedrückt werden
-
-\begin{align*
-
-​    k = \frac{\ln 2{t_{1/2.
-
-\end{align*
-
-Die Virusinaktivierungsrate wird dabei in der Einheit \si{\per\hour angegeben.
-
-Anteil der Viren, die beim Tragen einer Maske vom Emitter, trotzdem als Aerosole in den Raum ausgestoßen werden
-
-Für infektiöse Agenten, die beim Kontakt mit anderen Agenten eine Maske tragen (siehe \ref{ssec:maßnahmen), gibt dieser Wert den Anteil der Aerosole an, die nicht von der Maske aufgefangen werden und dadurch trotzdem in den Raum gelangen.
-
-Anteil der Viren, die beim Tragen einer Maske vom Empfänger, trotzdem eingeatmet werden
-
-Für suszeptible Agenten, die beim Kontakt mit anderen Agenten eine Maske tragen (siehe \ref{ssec:maßnahmen), gibt dieser Wert den Anteil der Aerosole an, die nicht von der Maske aufgefangen werden und dadurch dennoch vom Agenten inhaliert werden.
-
-Reduktionsfaktor für die Wahrscheinlichkeit der Infektionsübertragung, wenn beim Kontakt Abstand gehalten wird
-
-Für jeden direkten Kontakt von einem ansteckenden und einem suszeptiblen Agenten wird eine Wahrscheinlichkeit für die Übertragung der Infektion ausgerechnet.
-
-Wenn beide Agenten auf sozialen Abstand achten (siehe \ref{ssec:maßnahmen) wird die Übertragungswahrscheinlichkeit mit dem angegebenen Reduktionsfaktor multipliziert.
-
-Wenn nur einer der beiden Agenten Abstand hält, wird der Mittelwert aus dem angegeben Wert und 1 multipliziert.
-
-Reduktionsfaktor für die Viruslast bei geimpften Personen
-
-Bei geimpften Agenten wird die Standard-Viruslast mit dem angegebenen Wert multipliziert und somit reduziert.
-
-Reduktionsfaktor für die Wahrscheinlichkeit eines schweren bzw. kritischen Verlaufs bei geimpften Personen
-
-Für geimpfte Agenten wird die Wahrscheinlichkeit für einen schweren bzw. kritischen Verlauf durch Multiplikation mit dem angegebenen Wert reduziert.
-
-Erhöhungsfaktor für die Wahrscheinlichkeit eines kritischen Verlaufs bzw. das Sterben, wenn eine schwer kranke Person keinen Krankenhausplatz bekommt
-
-Wenn die Krankenhäuser überlastet sind, wird bei den Agenten, die aus Platzmangel nicht im Krankenhaus behandelt werden können, die Wahrscheinlichkeit für einen kritischen und tödlichen Verlauf mit dem angegebenen Faktor multipliziert.
-
-Mittelwert und Standardabweichung des Übergangs zwischen zwei Krankheitszuständen in Tagen
-
-Für jeden Übergang zwischen zwei Krankheitszuständen eines Agenten wird eine Übergangsdauer anhand einer Normalverteilung bestimmt.
-
-Diese Normalverteilung ist charakterisiert durch die angegebenen Werte für Mittelwert und Standardabweichung.
-
-Wahrscheinlichkeit für einen symptomatischen, schweren, kritischen und tödlichen Krankheitsverlauf
-
-Jedem Agenten wird abhängig von seinem Alter eine Wahrscheinlichkeit für einen symptomatischen, schweren, kritischen und tödlichen Krankheitsverlauf zugeordnet.
+###### symptomatic_probability_from_0 To symptomatic_probability_from_90
+###### severe_probability_from_0 to
+severe_probability_from_90
+###### critical_probability_from_0 to critical_probability_from_90
+###### dead_probability_from_0 to dead_probability_from_90
