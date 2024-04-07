@@ -41,7 +41,7 @@ A more complicated way of running the simulation is via defining own parameter v
 
 ### Set Parameter
 
-In order to modify the epidemiological data, open the [COVID_default.csv ](./data/inputs/scenario) and see for details on the parameters [here](./documentation/epidemic_parameters.md). To modify interventions, open [interventions.xls](./data/inputs/social_data/interventions.xls) and see for details on the interventions [here](./documentation/intervention_adjustment.md). Set basic parameters, such as start and end date or the regions that should be modeled in the StartUp.py manually.
+In order to modify the epidemiological data, open the [COVID_default.csv ](./data/inputs/scenario) and see for details on the parameters [here](./documentation/epidemic_parameters.md). To modify interventions, open [interventions.xls](./data/inputs/social_data/interventions.xls) and see for details on the interventions [here](./documentation/intervention_adjustment.md). Set basic parameters, e.g. start date and regions, manually in the StartUp.py within the function _set_GUI.
 
 ## Disclaimer
 
