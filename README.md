@@ -16,17 +16,28 @@ This agent-based model is part of the modeling tool INDEEP (**In**fectious **D**
 make install
 ```
 
+Alternatively type the commands:
+
+```bash
+pip install -r requirements.txt
+pre-commit install
+```
+
 ## Usage
 
 ### Basic
 
-A simple way of running the simulation is via the command:
+A simple way of running the simulation is  with pre-defined values and produce visual output in form of some plots. Use the command:
 
 ```bash
 make run
 ```
 
-This will run the simulation with pre-defined values and produce visual output in form of some plots.
+Alternatively type the commands:
+
+```bash
+ python3 StartUp.py
+```
 
 ### Advanced
 
