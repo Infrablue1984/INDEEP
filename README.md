@@ -57,7 +57,7 @@ In order to modify the epidemiological data, open the [COVID_default.csv ](./dat
    make table-update
    ```
 
-### File Structure
+## File Structure
 
 StartUp.py &rarr; Module collecting the GUI data and start the simulation.
 
